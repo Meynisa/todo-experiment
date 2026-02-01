@@ -1,10 +1,10 @@
-export const createTodoRequest = {
-  title: String,
-  description: String,
+import { TodoStatus } from '../enums/todo_status.js'
+
+export interface CreateTodoRequest {
+  title: string
+  description: string
 }
 
-export const updateTodoRequest = {
-  title: String,
-  description: String,
-  status: String,
+export interface UpdateTodoRequest extends CreateTodoRequest {
+  status: TodoStatus
 }

@@ -7,25 +7,75 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class TodosController {
   constructor(private todoService: TodoService) {}
 
-  async index() {
-    return this.todoService.all()
+  async index({ response }: HttpContext) {
+    try {
+      const todo = await this.todoService.all()
+      response.send({ data: todo })
+    } catch (error) {
+      console.error(error)
+      response.status(422).send({ message: 'Todo not found' })
+    }
   }
 
-  async show({ params }: HttpContext) {
-    return this.todoService.find(params.id)
+  async show({ params, response }: HttpContext) {
+    try {
+      const todo = await this.todoService.find(params.id)
+      response.send({ data: todo })
+    } catch (error) {
+      console.error(error)
+      response.status(404).send({ message: 'Todo not found' })
+    }
   }
 
-  async store({ request }: HttpContext) {
-    const payload = await request.validateUsing(createTodoValidator)
-    return this.todoService.create(payload)
+  /**
+   * Handle form submission for the create action
+   */
+  async store({ request, response }: HttpContext) {
+    try {
+      const payload = await request.validateUsing(createTodoValidator)
+      const todo = await this.todoService.create(payload)
+      response.status(201).send({ data: todo })
+    } catch (error) {
+      console.error(error)
+      if (Array.isArray(error.messages) && error.messages.length > 0) {
+        response.status(422).send({ message: error.messages[0].message })
+      } else {
+        response.status(422).send({ message: 'Todo Not Created' })
+      }
+    }
   }
 
-  async update({ params, request }: HttpContext) {
-    const payload = await request.validateUsing(updateTodoValidator)
-    return this.todoService.update(params.id, payload)
+  /**
+   * Handle form submission for the edit action
+   */
+  async update({ params, request, response }: HttpContext) {
+    try {
+      const payload = await request.validateUsing(updateTodoValidator)
+      const todo = await this.todoService.update(params.id, payload)
+      response.send({ message: 'Todo updated successfully', data: todo })
+    } catch (error) {
+      console.error(error)
+      if (Array.isArray(error.messages) && error.messages.length > 0) {
+        response.status(422).send({ message: error.messages[0].message })
+      } else {
+        response.status(422).send({ message: 'Todo Not Updated' })
+      }
+    }
   }
 
-  async destroy({ params }: HttpContext) {
-    return this.todoService.delete(params.id)
+  /**
+   * Delete record
+   */
+  async destroy({ params, response }: HttpContext) {
+    try {
+      await this.todoService.delete(params.id)
+      response.send({ message: 'Todo deleted successfully' })
+    } catch (error) {
+      if (Array.isArray(error.messages) && error.messages.length > 0) {
+        response.status(422).send({ message: error.messages[0].message })
+      } else {
+        response.status(422).send({ message: 'Todo Not Deleted' })
+      }
+    }
   }
 }

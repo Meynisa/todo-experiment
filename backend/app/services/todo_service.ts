@@ -1,56 +1,33 @@
-import OperationFailedException from '#exceptions/operation_failed_exception'
-import ResourceNotFoundException from '#exceptions/resource_not_found'
 import Todo from '#models/todo_models'
-import { createTodoRequest, updateTodoRequest } from '../requests/todo_requests'
 import { DateTime } from 'luxon'
+import { CreateTodoRequest, UpdateTodoRequest } from '../requests/todo_requests.js'
 
 export default class TodoService {
   async all() {
-    const todo = await Todo.query().whereNull('deletedAt')
-    return todo
+    return Todo.query().whereNull('deleted_at')
   }
 
   async find(id: number) {
-    try {
-      const todo = await Todo.findOrFail(id)
-      return todo
-    } catch (error) {
-      console.error(error)
-      throw new ResourceNotFoundException('Todo not found')
-    }
+    return Todo.query().where('id', id).whereNull('deleted_at').firstOrFail()
   }
 
-  async create(payload: createTodoRequest) {
-    try {
-      const todo = await Todo.create(payload)
-      return todo
-    } catch (error) {
-      console.error(error)
-      throw new OperationFailedException('Failed to create Todo')
-    }
+  async create(payload: CreateTodoRequest) {
+    return Todo.create(payload)
   }
 
-  async update(id: number, payload: updateTodoRequest) {
-    try {
-      const todo = await Todo.findOrFail(id)
-      todo.merge(payload)
-      await todo.save()
-      return { message: 'Todo updated successfully', data: todo }
-    } catch (error) {
-      console.error(error)
-      throw new ResourceNotFoundException('Todo not found')
-    }
+  async update(id: number, payload: UpdateTodoRequest) {
+    const todo = await Todo.query().where('id', id).whereNull('deleted_at').firstOrFail()
+    todo.merge(payload)
+    return await todo.save()
   }
 
   async delete(id: number) {
-    try {
-      const todo = await Todo.findOrFail(id)
-      todo.merge({ deletedAt: DateTime.now() })
-      await todo.save()
-      return { message: 'Todo deleted successfully' }
-    } catch (error) {
-      console.error(error)
-      throw new ResourceNotFoundException('Todo not found')
-    }
+    const todo = await Todo.query().where('id', id).whereNull('deleted_at').firstOrFail()
+    todo.merge({ deletedAt: DateTime.now() })
+    return await todo.save()
+  }
+
+  async stores(payload: CreateTodoRequest) {
+    return await Todo.create(payload)
   }
 }
