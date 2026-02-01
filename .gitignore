@@ -1,0 +1,29 @@
+# --- Dependencies ---
+# Ignores node_modules in the root, /backend, and /frontend
+node_modules/
+**/node_modules/
+
+# --- Environment / Secrets ---
+# Ignores all .env files anywhere in the project
+.env
+**/.env
+
+# --- Build Outputs ---
+# Ignores build and dist folders in any directory
+dist/
+build/
+**/dist/
+**/build/
+
+# --- Logs ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# --- OS Metadata ---
+.DS_Store
+
+# --- Optional: IDE Settings ---
+.vscode/
+.idea/

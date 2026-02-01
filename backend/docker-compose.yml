@@ -1,0 +1,16 @@
+services:
+  mysql:
+    image: mysql:9
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    ports:
+    - "3306:3306"
+    volumes:
+      - mysqldata:/var/lib/mysql/
+
+volumes:
+  mysqldata:
