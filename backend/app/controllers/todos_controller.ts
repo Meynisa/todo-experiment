@@ -1,5 +1,9 @@
 import TodoService from '#services/todo_service'
-import { createTodoValidator, updateTodoValidator } from '#validators/todo_validators'
+import {
+  createTodoValidator,
+  updateTodoValidator,
+  listTodosValidator,
+} from '#validators/todo_validators'
 import { inject } from '@adonisjs/core'
 import type { HttpContext } from '@adonisjs/core/http'
 
@@ -7,23 +11,39 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class TodosController {
   constructor(private todoService: TodoService) {}
 
-  async index({ response }: HttpContext) {
+  async index({ request, response }: HttpContext) {
     try {
-      const todo = await this.todoService.all()
-      response.send({ data: todo })
+      const query = await request.validateUsing(listTodosValidator)
+      const todo = await this.todoService.all(query.page, query.limit)
+
+      return response.ok({
+        success: true,
+        data: todo.all(),
+        meta: todo.getMeta(),
+      })
     } catch (error) {
       console.error(error)
-      response.status(422).send({ message: 'Todo not found' })
+      return response.notFound({
+        success: false,
+        message: 'Todo Not Found',
+      })
     }
   }
 
   async show({ params, response }: HttpContext) {
     try {
       const todo = await this.todoService.find(params.id)
-      response.send({ data: todo })
+
+      return response.ok({
+        success: true,
+        data: todo,
+      })
     } catch (error) {
       console.error(error)
-      response.status(404).send({ message: 'Todo not found' })
+      return response.notFound({
+        success: false,
+        message: 'Todo Not Found',
+      })
     }
   }
 
@@ -34,14 +54,21 @@ export default class TodosController {
     try {
       const payload = await request.validateUsing(createTodoValidator)
       const todo = await this.todoService.create(payload)
-      response.status(201).send({ data: todo })
+
+      return response.created({
+        success: true,
+        message: 'Todo created successfully',
+        data: todo,
+      })
     } catch (error) {
       console.error(error)
-      if (Array.isArray(error.messages) && error.messages.length > 0) {
-        response.status(422).send({ message: error.messages[0].message })
-      } else {
-        response.status(422).send({ message: 'Todo Not Created' })
-      }
+      return response.unprocessableEntity({
+        success: false,
+        message:
+          Array.isArray(error.messages) && error.messages.length > 0
+            ? error.messages[0].message
+            : 'Todo Failed to Create',
+      })
     }
   }
 
@@ -52,14 +79,21 @@ export default class TodosController {
     try {
       const payload = await request.validateUsing(updateTodoValidator)
       const todo = await this.todoService.update(params.id, payload)
-      response.send({ message: 'Todo updated successfully', data: todo })
+
+      return response.ok({
+        success: true,
+        message: 'Todo updated successfully',
+        data: todo,
+      })
     } catch (error) {
       console.error(error)
-      if (Array.isArray(error.messages) && error.messages.length > 0) {
-        response.status(422).send({ message: error.messages[0].message })
-      } else {
-        response.status(422).send({ message: 'Todo Not Updated' })
-      }
+      return response.unprocessableEntity({
+        success: false,
+        message:
+          Array.isArray(error.messages) && error.messages.length > 0
+            ? error.messages[0].message
+            : 'Todo Failed to Update',
+      })
     }
   }
 
@@ -69,13 +103,20 @@ export default class TodosController {
   async destroy({ params, response }: HttpContext) {
     try {
       await this.todoService.delete(params.id)
-      response.send({ message: 'Todo deleted successfully' })
+
+      return response.ok({
+        success: true,
+        message: 'Todo deleted successfully',
+      })
     } catch (error) {
-      if (Array.isArray(error.messages) && error.messages.length > 0) {
-        response.status(422).send({ message: error.messages[0].message })
-      } else {
-        response.status(422).send({ message: 'Todo Not Deleted' })
-      }
+      console.error(error)
+      return response.unprocessableEntity({
+        success: false,
+        message:
+          Array.isArray(error.messages) && error.messages.length > 0
+            ? error.messages[0].message
+            : 'Todo Failed to Delete',
+      })
     }
   }
 }
