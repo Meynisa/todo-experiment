@@ -58,7 +58,10 @@ export default function TodoListPage(){
     // Handle Update Todo
     const handleUpdateTodo = async (data: TodoFormData, id?: number) => {
         try {
-            if (!id) throw new Error("Todo ID is required for update")
+            if (!id) {
+                showError("Todo ID is required for update")
+                return;
+            }
             await dispatch(updateTodo({id, data})).unwrap()
             showSuccess("Todo Updated Successfully")
             setIsModalOpen(false)
