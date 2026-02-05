@@ -1,3 +1,17 @@
+/**
+ * ForceJsonResponseMiddleware - Ensures JSON Response Format
+ *
+ * This middleware modifies the incoming request's Accept header to always
+ * request JSON responses. This ensures consistent API behavior regardless
+ * of what Accept header the client sends.
+ *
+ * Benefits:
+ * - Validation errors return as JSON instead of HTML
+ * - Auth errors return as JSON instead of redirects
+ * - Consistent response format for API consumers
+ *
+ * Registered in: start/kernel.ts as a global middleware
+ */
 import type { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'
 

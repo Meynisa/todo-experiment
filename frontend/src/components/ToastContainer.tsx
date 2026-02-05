@@ -1,3 +1,17 @@
+/**
+ * ToastContainer - Toast Notification Manager
+ *
+ * A container component that renders multiple toast notifications
+ * in a fixed position (top-right corner). Manages the display
+ * and removal of toast messages.
+ *
+ * Props:
+ * - toasts: Array of ToastMessage objects to display
+ * - onRemoveToast: Callback to remove a toast by ID
+ *
+ * Also exports ToastMessage interface for typing toast objects.
+ * Works with: useToast hook for state management, Toast component for rendering
+ */
 import Toast, { ToastType } from "./Toast"
 
 export interface ToastMessage {

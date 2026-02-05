@@ -1,3 +1,15 @@
+/**
+ * EmptyState - Placeholder Component for Empty Todo List
+ *
+ * Displays a friendly message when no todos exist in the list.
+ * Shows an inbox icon with customizable message and description.
+ *
+ * Props:
+ * - message: Main heading text (default: "No Todos Found")
+ * - description: Subtext explaining next steps (default: prompt to create)
+ *
+ * Used in: TodoListPage.tsx when todos array is empty
+ */
 import React from 'react'
 import { FiInbox } from 'react-icons/fi'
 

@@ -1,3 +1,23 @@
+/**
+ * PaginationComponent - Page Navigation Controls
+ *
+ * Renders pagination UI with page numbers, prev/next buttons,
+ * and a dropdown to select items per page.
+ *
+ * Features:
+ * - Shows up to 5 page numbers at a time with ellipsis for gaps
+ * - Items per page selector (5, 10, 20, 50)
+ * - "Showing X to Y of Z results" summary
+ *
+ * Props:
+ * - meta: Pagination metadata from API (total, lastPage, etc.)
+ * - currentPage: Currently active page number
+ * - onPageChange: Callback when page is changed
+ * - limit: Current items per page
+ * - onLimitChange: Callback when limit is changed
+ *
+ * Used in: TodoListPage.tsx below the todo grid
+ */
 import { FiChevronsLeft } from "react-icons/fi"
 import type { Pagination } from "../utils/todoModel"
 

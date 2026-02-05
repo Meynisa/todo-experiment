@@ -1,3 +1,13 @@
+/**
+ * Loading - Spinner Component for Loading States
+ *
+ * A simple animated loading indicator with a spinning circle
+ * and "Loading Todos..." text. Uses CSS animation for the spinner.
+ *
+ * No props required - renders a centered loading UI.
+ *
+ * Used in: TodoListPage.tsx during initial data fetch
+ */
 import type React from "react";
 
 const Loading: React.FC = () => {

@@ -1,3 +1,19 @@
+/**
+ * useToast - Custom Hook for Toast Notification Management
+ *
+ * Provides state and methods for managing toast notifications.
+ * Toasts are stored as an array and each has a unique ID for removal.
+ *
+ * Returns:
+ * - toasts: Array of current toast messages
+ * - removeToast(id): Remove a specific toast by ID
+ * - showSuccess(message): Display a green success toast
+ * - showError(message): Display a red error toast
+ * - showInfo(message): Display a blue info toast
+ *
+ * Usage: const { toasts, showSuccess, showError, removeToast } = useToast()
+ * Works with: ToastContainer component for rendering
+ */
 import { useState, useCallback } from 'react'
 import type { ToastMessage } from "../components/ToastContainer"
 import type { ToastType } from '../components/Toast'

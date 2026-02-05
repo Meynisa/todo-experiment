@@ -1,3 +1,22 @@
+/**
+ * todoApi - API Service Layer for Backend Communication
+ *
+ * Axios-based HTTP client for interacting with the backend todo API.
+ * All methods return typed responses using ApiResponse<T> wrapper.
+ *
+ * Configuration:
+ * - Base URL from VITE_API_BASE_URL env var (default: localhost:4000)
+ * - Content-Type: application/json
+ *
+ * Methods:
+ * - getAllTodo(page, limit): GET /todos - Paginated list
+ * - getTodoById(id): GET /todos/:id - Single todo
+ * - createTodo(data): POST /todos - Create new
+ * - updateTodo(id, data): PUT /todos/:id - Update existing
+ * - deleteTodo(id): DELETE /todos/:id - Remove todo
+ *
+ * Used by: Redux async thunks in todoSlice.ts
+ */
 import axios from "axios";
 import type { ApiResponse, Todo, TodoFormData } from "../utils/todoModel";
 

@@ -1,3 +1,21 @@
+/**
+ * formatDate - Relative Date Formatting Utility
+ *
+ * Converts an ISO date string to a human-readable relative format.
+ *
+ * Output formats:
+ * - "Just now" - less than 1 minute ago
+ * - "X minutes ago" - less than 1 hour ago
+ * - "X hours ago" - same day
+ * - "Yesterday" - previous day
+ * - "X days ago" - within the last week
+ * - "DD-MM-YYYY" - older than 7 days
+ *
+ * @param dateString - ISO date string (e.g., from API createdAt)
+ * @returns Formatted relative date string
+ *
+ * Used in: TodoCard.tsx to display todo creation dates
+ */
 export const formatDate = (dateString: string): string => {
     const date = new Date(dateString);
     const now = new Date();

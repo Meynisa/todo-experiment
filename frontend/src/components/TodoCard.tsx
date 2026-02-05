@@ -1,3 +1,20 @@
+/**
+ * TodoCard - Individual Todo Display Card
+ *
+ * Renders a single todo item as a card with:
+ * - Title and description
+ * - Creation date (formatted as relative time)
+ * - Status badge (color-coded)
+ * - Edit and Delete action buttons
+ *
+ * Props:
+ * - todo: The Todo object to display
+ * - onEdit: Callback when edit button is clicked
+ * - onDelete: Callback when delete button is clicked
+ *
+ * Uses: StatusBadge for status display, formatDate utility for dates
+ * Used in: TodoListPage.tsx in the todo grid
+ */
 import { FiCalendar, FiEdit2, FiTrash } from "react-icons/fi"
 import type { Todo } from "../utils/todoModel"
 import { formatDate } from "../utils/formatDate"

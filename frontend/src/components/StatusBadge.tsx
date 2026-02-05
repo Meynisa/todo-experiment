@@ -1,3 +1,17 @@
+/**
+ * StatusBadge - Colored Badge for Todo Status
+ *
+ * Renders a pill-shaped badge with color coding based on todo status:
+ * - TODO (yellow): "To Do"
+ * - IN_PROGRESS (blue): "In Progress"
+ * - PENDING (orange): "Pending"
+ * - DONE (green): "Done"
+ *
+ * Props:
+ * - status: TodoStatus enum value
+ *
+ * Used in: TodoCard.tsx to display the current status of each todo
+ */
 import { TodoStatus } from "../utils/todoModel";
 
 interface StatusBadgeProps {

@@ -1,3 +1,25 @@
+/**
+ * TodoModal - Modal Dialog for Create/Edit Todo
+ *
+ * A dual-mode modal component that handles both creating new todos
+ * and editing existing ones. Automatically populates form data
+ * when in edit mode.
+ *
+ * Props:
+ * - mode: ModalMode.CREATE or ModalMode.EDIT
+ * - todo: Todo object to edit (required for EDIT mode)
+ * - isOpen: Controls modal visibility
+ * - onClose: Callback when modal is closed
+ * - onSubmit: Callback with form data (and todo ID for updates)
+ * - loading: Disables form and shows loading state
+ *
+ * Features:
+ * - Title validation (required, min 3 chars)
+ * - Status selector (only shown in EDIT mode)
+ * - Auto-resets form when opened in CREATE mode
+ *
+ * Exports: ModalMode constant for mode type safety
+ */
 import React, { useState } from 'react'
 import { FiX } from 'react-icons/fi'
 import { TodoStatus, type Todo, type TodoFormData } from "../utils/todoModel";

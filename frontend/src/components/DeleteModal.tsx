@@ -1,3 +1,18 @@
+/**
+ * DeleteModal - Confirmation Dialog for Todo Deletion
+ *
+ * A modal component that asks users to confirm before deleting a todo.
+ * Displays a warning icon and the todo title being deleted.
+ *
+ * Props:
+ * - isOpen: Controls modal visibility
+ * - onClose: Callback when Cancel is clicked or backdrop is clicked
+ * - onConfirm: Callback when Delete is confirmed
+ * - loading: Disables buttons and shows "Deleting..." state
+ * - todoTitle: Name of the todo being deleted (shown in message)
+ *
+ * Used in: TodoListPage.tsx for delete confirmation flow
+ */
 import { FiAlertTriangle } from "react-icons/fi"
 
 interface DeleteModalProps {

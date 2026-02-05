@@ -1,3 +1,21 @@
+/**
+ * TodoForm - Inline Form for Creating Todos
+ *
+ * A form component embedded in the page for quick todo creation.
+ * Includes client-side validation and loading state handling.
+ *
+ * Features:
+ * - Title field (required, min 3 chars)
+ * - Description field (optional)
+ * - Status dropdown selector
+ * - Form resets after successful submission
+ *
+ * Props:
+ * - onSubmit: Callback receiving TodoFormData when form is valid
+ * - loading: Disables inputs and shows "Creating..." state
+ *
+ * Note: This is an alternative to TodoModal for inline creation.
+ */
 import React, { useState } from "react";
 import { FiPlus } from 'react-icons/fi'
 import { TodoStatus, type TodoFormData } from "../utils/todoModel";

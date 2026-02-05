@@ -1,3 +1,21 @@
+/**
+ * Toast - Single Toast Notification Component
+ *
+ * Displays a notification message that auto-dismisses after a duration.
+ * Supports three types with different colors and icons:
+ * - SUCCESS (green): Checkmark icon
+ * - ERROR (red): X icon
+ * - INFO (blue): Alert icon
+ *
+ * Props:
+ * - message: Text to display in the toast
+ * - type: ToastType (success, error, info)
+ * - onClose: Callback when toast is dismissed
+ * - duration: Auto-dismiss time in ms (default: 3000)
+ *
+ * Also exports ToastType constant object for type-safe toast types.
+ * Used by: ToastContainer.tsx which manages multiple toasts
+ */
 import { useEffect } from "react"
 import { FiAlertCircle, FiCheckCircle, FiX, FiXCircle } from "react-icons/fi"
 

@@ -1,3 +1,23 @@
+/**
+ * TodoListPage - Main Page Component for Todo Management
+ *
+ * The primary page that orchestrates all todo operations and UI components.
+ * Manages state for modals, pagination, and coordinates Redux actions.
+ *
+ * Features:
+ * - Displays todo grid with cards (responsive: 1-3 columns)
+ * - Create/Edit todo via modal dialog
+ * - Delete confirmation modal
+ * - Pagination with customizable page size
+ * - Toast notifications for user feedback
+ * - Loading and empty states
+ *
+ * State Management:
+ * - Redux: todos, pagination, loading, errors
+ * - Local: modal visibility, selected todo, delete confirmation
+ *
+ * Uses all components from /components and Redux store from /store
+ */
 import { useEffect, useState } from "react"
 import { useToast } from "../hooks/useToast"
 import { useAppDispatch, useAppSelector } from "../store/hooks"

@@ -1,3 +1,17 @@
+/**
+ * ContainerBindingsMiddleware - IoC Container Bindings for Request Lifecycle
+ *
+ * This middleware runs on every HTTP request and binds request-specific instances
+ * to the AdonisJS IoC container. This enables dependency injection of HttpContext
+ * and Logger throughout the application.
+ *
+ * Why it's needed:
+ * - Allows services/controllers to receive HttpContext via @inject() decorator
+ * - Provides access to request-scoped logger instance
+ * - Enables clean separation of concerns without passing ctx manually
+ *
+ * Registered in: start/kernel.ts as a global middleware
+ */
 import { Logger } from '@adonisjs/core/logger'
 import { HttpContext } from '@adonisjs/core/http'
 import type { NextFn } from '@adonisjs/core/types/http'

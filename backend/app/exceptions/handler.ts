@@ -1,3 +1,17 @@
+/**
+ * HttpExceptionHandler - Global Exception Handler for the API
+ *
+ * This handler intercepts all unhandled exceptions and formats them into
+ * consistent JSON error responses. It's registered globally in the AdonisJS app.
+ *
+ * Error handling strategy:
+ * - Validation errors (E_VALIDATION_ERROR) -> 422 status with first error message
+ * - Known HTTP errors (with status code)   -> Returns the error's status and message
+ * - Unknown/server errors                  -> 500 Internal Server Error
+ *
+ * The debug mode is automatically enabled in non-production environments
+ * to show verbose error details during development.
+ */
 import app from '@adonisjs/core/services/app'
 import { HttpContext, ExceptionHandler } from '@adonisjs/core/http'
 

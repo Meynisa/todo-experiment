@@ -1,3 +1,19 @@
+/**
+ * TodosController - HTTP Request Handler for Todo CRUD operations
+ *
+ * This controller handles all incoming HTTP requests related to todos and delegates
+ * business logic to TodoService. It follows the RESTful API pattern.
+ *
+ * Available endpoints:
+ * - GET    /todos      -> index()   - List all todos with pagination
+ * - GET    /todos/:id  -> show()    - Get a single todo by ID
+ * - POST   /todos      -> store()   - Create a new todo
+ * - PUT    /todos/:id  -> update()  - Update an existing todo
+ * - DELETE /todos/:id  -> destroy() - Soft delete a todo
+ *
+ * Uses @inject() decorator for automatic dependency injection of TodoService.
+ * All request payloads are validated using VineJS validators before processing.
+ */
 import TodoService from '#services/todo_service'
 import {
   createTodoValidator,

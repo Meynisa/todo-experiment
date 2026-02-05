@@ -1,3 +1,29 @@
+/**
+ * todoSlice - Redux Slice for Todo State Management
+ *
+ * Contains all Redux logic for managing todos including async thunks
+ * for API calls and reducers for state updates.
+ *
+ * State Shape (TodoState):
+ * - todos: Array of Todo items
+ * - meta: Pagination metadata from API
+ * - loading: Boolean for async operation status
+ * - error: Error message string or null
+ * - currentPage: Active page number
+ * - limit: Items per page
+ *
+ * Async Thunks:
+ * - fetchAllTodos: Load paginated todo list
+ * - fetchTodoById: Load single todo (unused currently)
+ * - createTodo: Add new todo
+ * - updateTodo: Modify existing todo
+ * - deleteTodo: Remove todo by ID
+ *
+ * Sync Reducers:
+ * - setCurrentPage: Change pagination page
+ * - setLimit: Change items per page (resets to page 1)
+ * - clearError: Reset error state
+ */
 import { createSlice, createAsyncThunk, type PayloadAction } from '@reduxjs/toolkit'
 import todoApi from '../services/todoApi';
 import { type TodoFormData, type TodoState } from '../utils/todoModel';
